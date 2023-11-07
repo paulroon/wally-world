@@ -2,11 +2,11 @@
   "name": "wallyworld",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/app.js",
+  "main": "dist/index.js",
   "scripts": {
-    "prod": "node dist/app.js",
+    "prod": "node dist/index.js",
     "build": "rimraf ./dist && tsc",
-    "start": "npm run build && node dist/app.js",
+    "start": "npm run build && node dist/index.js",
     "dev": "ts-node-dev src/app.ts",
     "build:watch": "tsc -w",
     "test": "jest"
