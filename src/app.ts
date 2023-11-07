@@ -7,6 +7,10 @@ import { CancelRequestBody, makeCancellation } from "./helper/cancel"
 const app = express()
 app.use(express.json()) // Middleware to parse JSON request bodies
 
+app.get("/", (req: Request, res: Response) => {
+  res.json({ message: "Just use postman!" })
+})
+
 /**
  * Availability endpoint
  * Returns a list of products with their availability
