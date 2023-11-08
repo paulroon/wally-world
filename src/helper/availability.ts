@@ -1,4 +1,5 @@
 import { z } from "zod"
+import { formatDate } from "./util"
 
 //
 // Availability
@@ -17,6 +18,24 @@ const addNDays = (date: Date, n: number): Date => {
   return newDate
 }
 
+const prices = [
+  {
+    type: "ADULT",
+    currency: "GBP",
+    amount: 100,
+  },
+  {
+    type: "CHILD",
+    currency: "GBP",
+    amount: 20,
+  },
+  {
+    type: "TEEN",
+    currency: "GBP",
+    amount: 500,
+  },
+]
+
 export const availabilityData = (startDate?: Date, endDate?: Date, productId?: string) => {
   const today = new Date()
   const start = startDate || today
@@ -27,8 +46,8 @@ export const availabilityData = (startDate?: Date, endDate?: Date, productId?: s
     return {
       product_id: `P100${i}`,
       name: `Product [${i}]`,
-      start_date: dateToAdd,
-      price: 100,
+      start_date: formatDate(dateToAdd),
+      prices,
       capacity: 10,
     }
   }).filter((item) => {
