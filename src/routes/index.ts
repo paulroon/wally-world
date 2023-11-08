@@ -1,10 +1,10 @@
 import { Request, Response, Router } from "express"
-import { AvailabilityRequestBody, availabilityData } from "../helper/availability"
+import { AvailabilityRequestBody, addNDays, availabilityData } from "../helper/availability"
 import { ReservationRequestBody, makeReservation } from "../helper/reserve"
 import { BookingRequestBody, makeBooking } from "../helper/book"
 import { CancelRequestBody, makeCancellation } from "../helper/cancel"
 
-const router: Router = Router()
+const router: Router = Router({ strict: true })
 
 router.get("/", (req: Request, res: Response) => {
   res.send(`<h2>Wally-World!</h2>`)
@@ -31,6 +31,13 @@ router.post("/availability", (req: Request, res: Response) => {
   const endDate = reqData.data.end_date ? new Date(reqData.data.end_date) : undefined
 
   return res.json(availabilityData(startDate, endDate, reqData.data.product_id))
+})
+router.get("/availability", (req: Request, res: Response) => {
+  const today = new Date()
+  const startDate = today
+  const endDate = addNDays(today, 365)
+
+  return res.json(availabilityData(startDate, endDate))
 })
 
 /**

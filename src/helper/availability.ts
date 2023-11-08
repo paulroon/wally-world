@@ -12,7 +12,7 @@ export const AvailabilityRequestBody = z.object({
   quantity: z.number().int().positive().optional(),
 })
 
-const addNDays = (date: Date, n: number): Date => {
+export const addNDays = (date: Date, n: number): Date => {
   const newDate = new Date(date) // Avoid mutating the original date
   newDate.setDate(newDate.getDate() + n)
   return newDate
