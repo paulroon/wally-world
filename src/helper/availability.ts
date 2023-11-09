@@ -1,5 +1,6 @@
 import { z } from "zod"
 import { formatDate } from "./util"
+import { count } from "console"
 
 //
 // Availability
@@ -17,6 +18,8 @@ export const addNDays = (date: Date, n: number): Date => {
   newDate.setDate(newDate.getDate() + n)
   return newDate
 }
+
+const capacities = [0, 5, 10, 30]
 
 const prices = [
   {
@@ -54,7 +57,7 @@ export const availabilityData = (
       name: `Product [${i}]`,
       start_date: formatDate(dateToAdd),
       prices,
-      capacity: 10,
+      capacity: capacities[i % capacities.length],
     }
   }).filter((item) => {
     const itemDate = new Date(item.start_date)
