@@ -42,7 +42,7 @@ router.get("/availability", (req: Request, res: Response) => {
   const startDate = today
   const endDate = addNDays(today, 365)
 
-  return res.json(availabilityData(startDate, endDate, undefined, 1))
+  return res.json(availabilityData(startDate, endDate))
 })
 
 /**

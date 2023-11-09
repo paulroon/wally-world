@@ -58,8 +58,8 @@ export const availabilityData = (
     }
   }).filter((item) => {
     const itemDate = new Date(item.start_date)
-    const isAfterStart = itemDate >= start
-    const isBeforeEnd = itemDate <= end
+    const isAfterStart = startDate ? itemDate >= start : true
+    const isBeforeEnd = endDate ? itemDate <= end : true
     const isCapacityMatch = requiredCap <= item.capacity
     const isProductIdMatch = productId ? item.product_id === productId : true
     return isAfterStart && isBeforeEnd && isProductIdMatch && isCapacityMatch
