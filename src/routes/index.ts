@@ -7,7 +7,12 @@ import { CancelRequestBody, makeCancellation } from "../helper/cancel"
 const router: Router = Router({ strict: true })
 
 router.get("/", (req: Request, res: Response) => {
-  res.send(`<h2>Wally-World!</h2>`)
+  res.send(
+    `<div style="display: flex; align-items: center; justify-content: center;">
+      <h2>Wally-World!</h2>
+      <img src="https://i.etsystatic.com/20854952/r/il/4d1f39/2020697240/il_fullxfull.2020697240_5jck.jpg" width="500" />
+    </div>`
+  )
 })
 
 /**

@@ -1,11 +1,11 @@
 import express from "express"
-import routes from "../routes"
-import serverless from "serverless-http/serverless-http"
+import router from "../../src/routes"
+import serverless from "serverless-http"
 
 const app = express()
 
 app.use(express.json())
 
-app.use("/", routes)
+app.use("/.netlify/functions/", router)
 
 export const handler = serverless(app)
