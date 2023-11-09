@@ -6,6 +6,9 @@
     "start": "npm run build && node dist/app.js",
     "build": "tsc"
   },
+  "engines": {
+    "node": ">=18.18.0 <19.0.0"
+  },
   "main": "dist/app.js",
   "keywords": [],
   "author": "Paul Rooney",
