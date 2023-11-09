@@ -9,7 +9,7 @@ export const AvailabilityRequestBody = z.object({
   start_date: z.string().optional(),
   end_date: z.string().optional(),
   product_id: z.string().optional(),
-  quantity: z.number().int().positive().optional(),
+  capacity: z.number().int().positive().optional(),
 })
 
 export const addNDays = (date: Date, n: number): Date => {
@@ -36,10 +36,16 @@ const prices = [
   },
 ]
 
-export const availabilityData = (startDate?: Date, endDate?: Date, productId?: string) => {
+export const availabilityData = (
+  startDate?: Date,
+  endDate?: Date,
+  productId?: string,
+  capacity?: number
+) => {
   const today = new Date()
   const start = startDate || today
   const end = endDate || addNDays(today, 23)
+  const requiredCap = capacity || 1
 
   return Array.from({ length: 24 }, (_, i) => {
     const dateToAdd = addNDays(today, i)
@@ -54,7 +60,8 @@ export const availabilityData = (startDate?: Date, endDate?: Date, productId?: s
     const itemDate = new Date(item.start_date)
     const isAfterStart = itemDate >= start
     const isBeforeEnd = itemDate <= end
+    const isCapacityMatch = requiredCap <= item.capacity
     const isProductIdMatch = productId ? item.product_id === productId : true
-    return isAfterStart && isBeforeEnd && isProductIdMatch
+    return isAfterStart && isBeforeEnd && isProductIdMatch && isCapacityMatch
   })
 }

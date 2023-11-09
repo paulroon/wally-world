@@ -22,7 +22,7 @@ router.get("/", (req: Request, res: Response) => {
  *      start_date: string (optional),
  *      end_date: string (optional),
  *      product_id: string (optional),
- *      quantity: number (optional),
+ *      capacity: number (optional),
  * }
  */
 router.post("/availability", (req: Request, res: Response) => {
@@ -33,15 +33,16 @@ router.post("/availability", (req: Request, res: Response) => {
 
   const startDate = reqData.data.start_date ? new Date(reqData.data.start_date) : undefined
   const endDate = reqData.data.end_date ? new Date(reqData.data.end_date) : undefined
+  const capacity = reqData.data.capacity ? reqData.data.capacity : 1
 
-  return res.json(availabilityData(startDate, endDate, reqData.data.product_id))
+  return res.json(availabilityData(startDate, endDate, reqData.data.product_id, capacity))
 })
 router.get("/availability", (req: Request, res: Response) => {
   const today = new Date()
   const startDate = today
   const endDate = addNDays(today, 365)
 
-  return res.json(availabilityData(startDate, endDate))
+  return res.json(availabilityData(startDate, endDate, undefined, 1))
 })
 
 /**
